@@ -1,11 +1,10 @@
 import './App.css'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import Price from './components/Price'
 
 // Not using an env because no authentication is required for API
 // TODO: Implement other currencies `https://api.coinbase.com/v2/prices/spot?currency=${chosenCurrency || USD}` - will this work? Default will be USD
-// TODO: Implement an error to show if no data
+// TODO: Implement an error state
 // TODO: Implement a chart (Angus suggested Plotly)
 // TODO: Maybe implement useReducer() for the loading/error and for price/time states?
 // TODO: Convert time data ISO format to normal date format
@@ -65,8 +64,6 @@ function App() {
           <p>as at {timeData}</p>
         </div>
       )}
-
-      <Price />
     </div>
   )
 }
