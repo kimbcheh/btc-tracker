@@ -2,14 +2,6 @@ import './App.css'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-// Not using an env because no authentication is required for API
-// TODO: Implement other currencies `https://api.coinbase.com/v2/prices/spot?currency=${chosenCurrency || USD}` - will this work? Default will be USD
-// TODO: Implement an error state
-// TODO: Implement a chart (Angus suggested Plotly)
-// TODO: Maybe implement useReducer() for the loading/error and for price/time states?
-// TODO: Convert time data ISO format to normal date format
-// TODO: UI - Implement a loading spinner/animation
-
 function App() {
   const [isLoading, setIsLoading] = useState(true)
   const [priceData, setPriceData] = useState()
