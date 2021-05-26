@@ -8,6 +8,8 @@ import Price from './components/Price'
 // TODO: Implement an error to show if no data
 // TODO: Implement a chart (Angus suggested Plotly)
 // TODO: Maybe implement useReducer() for the loading/error and for price/time states?
+// TODO: Convert time data ISO format to normal date format
+// TODO: UI - Implement a loading spinner/animation
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -15,59 +17,55 @@ function App() {
   const [timeData, setTimeData] = useState()
 
   useEffect(() => {
+    // Set to loading again on each refresh
     setIsLoading(true)
 
-    console.log('initialising interval')
+    // Initialising interval of 60 seconds
     const interval = setInterval(() => {
-      fetchPriceData()
-      fetchTimeData()
+      fetchData()
     }, 60000)
 
-    // To fetch BTC spot price data
-    const fetchPriceData = async () => {
+    // Fetch price and time data
+    const fetchData = async () => {
       try {
-        const response = await axios.get(
-          'https://api.coinbase.com/v2/prices/spot?currency=USD'
-        )
-        console.log(response.data.data)
-        setPriceData(response.data.data)
-        setIsLoading(false)
+        const pricePromise = () => {
+          return axios.get(
+            'https://api.coinbase.com/v2/prices/spot?currency=USD'
+          )
+        }
+        const timePromise = () => {
+          return axios.get('https://api.coinbase.com/v2/time')
+        }
+        await Promise.all([pricePromise(), timePromise()]).then((response) => {
+          setPriceData(response[0].data.data.amount)
+          setTimeData(response[1].data.data.iso)
+          setIsLoading(false)
+        })
       } catch (error) {
         console.error(error)
       }
     }
-    fetchPriceData()
 
-    // To fetch time at API server
-    const fetchTimeData = async () => {
-      try {
-        const response = await axios.get('https://api.coinbase.com/v2/time')
-        console.log(response.data.data.iso)
-        setTimeData(response.data.data.iso)
-      } catch (error) {
-        console.error(error)
-      }
-    }
-    fetchTimeData()
+    fetchData()
 
+    // Clear interval set
     return () => {
       clearInterval(interval)
     }
   }, [])
 
-  if (isLoading) {
-    return (
-      <div>
-        <p>Loading...</p>
-      </div>
-    )
-  }
-
   return (
     <div>
       <h1>BTC Tracker</h1>
-      <p>{priceData.amount}</p>
-      <p>as of {timeData}</p>
+      {isLoading ? (
+        <div>Loading ...</div>
+      ) : (
+        <div>
+          <p>{priceData}</p>
+          <p>as at {timeData}</p>
+        </div>
+      )}
+
       <Price />
     </div>
   )
