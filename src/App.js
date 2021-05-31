@@ -20,12 +20,10 @@ function App() {
     const fetchData = async () => {
       try {
         const pricePromise = () => {
-          return axios.get(
-            'https://api.coinbase.com/v2/prices/spot?currency=USD'
-          )
+          return axios.get(process.env.REACT_APP_API_PRICE_URL)
         }
         const timePromise = () => {
-          return axios.get('https://api.coinbase.com/v2/time')
+          return axios.get(process.env.REACT_APP_API_TIME_URL)
         }
         await Promise.all([pricePromise(), timePromise()]).then((response) => {
           setPriceData(response[0].data.data.amount)
