@@ -1,6 +1,9 @@
 import './App.css'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import dayjs from 'dayjs'
+
+dayjs().format()
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -27,7 +30,10 @@ function App() {
         }
         await Promise.all([pricePromise(), timePromise()]).then((response) => {
           setPriceData(response[0].data.data.amount)
-          setTimeData(response[1].data.data.iso)
+          let formattedTime = dayjs(response[1].data.data.iso).format(
+            'dddd MMMM D YYYY, h:mm:ss A'
+          )
+          setTimeData(formattedTime)
           setIsLoading(false)
         })
       } catch (error) {
