@@ -9,6 +9,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true)
   const [priceData, setPriceData] = useState()
   const [timeData, setTimeData] = useState()
+  const [currency, setCurrency] = useState('AUD')
 
   useEffect(() => {
     // Set to loading again on each refresh
@@ -19,11 +20,18 @@ function App() {
       fetchData()
     }, 60000)
 
+    const currencyAUD = 'AUD'
+    const currencyUSD = 'USD'
+    const currencyEUR = 'EUR'
+    const currencyGBP = 'GBP'
+
     // Fetch price and time data
     const fetchData = async () => {
       try {
         const pricePromise = () => {
-          return axios.get('https://api.coinbase.com/v2/prices/BTC-USD/spot')
+          return axios.get(
+            `https://api.coinbase.com/v2/prices/BTC-${currency}/spot`
+          )
         }
         const timePromise = () => {
           return axios.get(process.env.REACT_APP_API_TIME_URL)
