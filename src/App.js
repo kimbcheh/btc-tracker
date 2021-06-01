@@ -10,6 +10,14 @@ function App() {
   const [priceData, setPriceData] = useState()
   const [timeData, setTimeData] = useState()
   const [currency, setCurrency] = useState('AUD')
+  const [currencySymbol, setCurrencySymbol] = useState('$')
+
+  const symbolReference = {
+    AUD: '$',
+    USD: '$',
+    EUR: '€',
+    GBP: '£',
+  }
 
   useEffect(() => {
     // Set to loading again on each refresh
@@ -55,6 +63,8 @@ function App() {
   const clickHandler = (props) => {
     let currencyCode = props.target.innerText
     setCurrency(currencyCode)
+    let currencySymbolCode = symbolReference[currencyCode]
+    setCurrencySymbol(currencySymbolCode)
   }
 
   return (
@@ -64,7 +74,10 @@ function App() {
         <div>Loading ...</div>
       ) : (
         <div>
-          <p>{priceData}</p>
+          <p>
+            {currencySymbol}
+            {priceData}
+          </p>
           <p>as at {timeData}</p>
         </div>
       )}
