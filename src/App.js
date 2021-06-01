@@ -20,11 +20,6 @@ function App() {
       fetchData()
     }, 60000)
 
-    const currencyAUD = 'AUD'
-    const currencyUSD = 'USD'
-    const currencyEUR = 'EUR'
-    const currencyGBP = 'GBP'
-
     // Fetch price and time data
     const fetchData = async () => {
       try {
@@ -55,7 +50,12 @@ function App() {
     return () => {
       clearInterval(interval)
     }
-  }, [])
+  }, [currency])
+
+  const clickHandler = (props) => {
+    let currencyCode = props.target.innerText
+    setCurrency(currencyCode)
+  }
 
   return (
     <div>
@@ -69,10 +69,10 @@ function App() {
         </div>
       )}
       <div>
-        <button>AUD</button>
-        <button>USD</button>
-        <button>EUR</button>
-        <button>GPB</button>
+        <button onClick={clickHandler}>AUD</button>
+        <button onClick={clickHandler}>USD</button>
+        <button onClick={clickHandler}>EUR</button>
+        <button onClick={clickHandler}>GBP</button>
       </div>
     </div>
   )
