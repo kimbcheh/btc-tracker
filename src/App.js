@@ -60,6 +60,12 @@ function App() {
           <p>as at {timeData}</p>
         </div>
       )}
+      <div>
+        <button>AUD</button>
+        <button>USD</button>
+        <button>EUR</button>
+        <button>GPB</button>
+      </div>
     </div>
   )
 }
