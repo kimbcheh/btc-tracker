@@ -23,7 +23,7 @@ function App() {
     const fetchData = async () => {
       try {
         const pricePromise = () => {
-          return axios.get(process.env.REACT_APP_API_PRICE_URL)
+          return axios.get('https://api.coinbase.com/v2/prices/BTC-USD/spot')
         }
         const timePromise = () => {
           return axios.get(process.env.REACT_APP_API_TIME_URL)
