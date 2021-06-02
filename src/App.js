@@ -40,7 +40,7 @@ function App() {
           return axios.get(process.env.REACT_APP_API_TIME_URL)
         }
         await Promise.all([pricePromise(), timePromise()]).then((response) => {
-          setPriceData(response[0].data.data.amount)
+          setPriceData(Math.round(response[0].data.data.amount * 100) / 100)
           let formattedTime = dayjs(response[1].data.data.iso).format(
             'dddd MMMM D YYYY, h:mm:ss A'
           )
