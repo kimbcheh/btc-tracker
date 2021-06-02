@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Button from 'react-bootstrap/Button'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import Spinner from 'react-bootstrap/Spinner'
 import axios from 'axios'
 import dayjs from 'dayjs'
 
@@ -76,7 +77,7 @@ function App() {
       <Jumbotron>
         <h1>BTC Tracker</h1>
         {isLoading ? (
-          <div>Loading ...</div>
+          <Spinner animation="border" />
         ) : (
           <div>
             <p>
