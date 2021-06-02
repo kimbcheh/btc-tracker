@@ -4,6 +4,7 @@ import Jumbotron from 'react-bootstrap/Jumbotron'
 import Button from 'react-bootstrap/Button'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Spinner from 'react-bootstrap/Spinner'
+import Row from 'react-bootstrap/Row'
 import axios from 'axios'
 import dayjs from 'dayjs'
 
@@ -73,23 +74,28 @@ function App() {
   }
 
   return (
-    <Container>
+    <Container className="mt-5">
       <Jumbotron>
-        <h1>BTC Tracker</h1>
-        {isLoading ? (
-          <Spinner animation="border" />
-        ) : (
-          <div>
-            <p>
-              <h2>
-                {currency.symbol}
-                {priceData}
-              </h2>
-            </p>
-            <p>as at {timeData}</p>
-          </div>
-        )}
-        <Container>
+        <Container className="text-center">
+          <h1>BTC Tracker</h1>
+          <Container
+            style={{ height: '180px' }}
+            className="d-flex align-items-center justify-content-center"
+          >
+            {isLoading ? (
+              <Spinner animation="border" className="text-primary" />
+            ) : (
+              <div>
+                <p>
+                  <h2 className="display-1">
+                    {currency.symbol}
+                    {priceData}
+                  </h2>
+                </p>
+                <p className="text-secondary">as at {timeData}</p>
+              </div>
+            )}
+          </Container>
           <ButtonGroup>
             <Button
               onClick={clickHandler}
