@@ -80,8 +80,10 @@ function App() {
         ) : (
           <div>
             <p>
-              {currency.symbol}
-              {priceData}
+              <h2>
+                {currency.symbol}
+                {priceData}
+              </h2>
             </p>
             <p>as at {timeData}</p>
           </div>
