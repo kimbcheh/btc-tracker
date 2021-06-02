@@ -9,6 +9,14 @@ function App() {
   const [isLoading, setIsLoading] = useState(true)
   const [priceData, setPriceData] = useState()
   const [timeData, setTimeData] = useState()
+  const [currency, setCurrency] = useState({ code: 'AUD', symbol: '$' })
+
+  const symbolReference = {
+    AUD: '$',
+    USD: '$',
+    EUR: '€',
+    GBP: '£',
+  }
 
   useEffect(() => {
     // Set to loading again on each refresh
@@ -23,13 +31,15 @@ function App() {
     const fetchData = async () => {
       try {
         const pricePromise = () => {
-          return axios.get(process.env.REACT_APP_API_PRICE_URL)
+          return axios.get(
+            `https://api.coinbase.com/v2/prices/BTC-${currency.code}/spot`
+          )
         }
         const timePromise = () => {
           return axios.get(process.env.REACT_APP_API_TIME_URL)
         }
         await Promise.all([pricePromise(), timePromise()]).then((response) => {
-          setPriceData(response[0].data.data.amount)
+          setPriceData(Math.round(response[0].data.data.amount * 100) / 100)
           let formattedTime = dayjs(response[1].data.data.iso).format(
             'dddd MMMM D YYYY, h:mm:ss A'
           )
@@ -47,7 +57,16 @@ function App() {
     return () => {
       clearInterval(interval)
     }
-  }, [])
+  }, [currency])
+
+  // Handler for buttons to set currency and currencySymbol state
+  const clickHandler = (props) => {
+    let selectedCurrency = props.target.innerText
+    setCurrency({
+      code: selectedCurrency,
+      symbol: symbolReference[selectedCurrency],
+    })
+  }
 
   return (
     <div>
@@ -56,10 +75,27 @@ function App() {
         <div>Loading ...</div>
       ) : (
         <div>
-          <p>{priceData}</p>
+          <p>
+            {currency.symbol}
+            {priceData}
+          </p>
           <p>as at {timeData}</p>
         </div>
       )}
+      <div>
+        <button onClick={clickHandler} disabled={currency.code === 'AUD'}>
+          AUD
+        </button>
+        <button onClick={clickHandler} disabled={currency.code === 'USD'}>
+          USD
+        </button>
+        <button onClick={clickHandler} disabled={currency.code === 'EUR'}>
+          EUR
+        </button>
+        <button onClick={clickHandler} disabled={currency.code === 'GBP'}>
+          GBP
+        </button>
+      </div>
     </div>
   )
 }
