@@ -60,6 +60,7 @@ function App() {
     }
   }, [currency])
 
+  // Handler for buttons to set currency and currencySymbol state
   const clickHandler = (props) => {
     let currencyCode = props.target.innerText
     setCurrency(currencyCode)
@@ -82,10 +83,18 @@ function App() {
         </div>
       )}
       <div>
-        <button onClick={clickHandler}>AUD</button>
-        <button onClick={clickHandler}>USD</button>
-        <button onClick={clickHandler}>EUR</button>
-        <button onClick={clickHandler}>GBP</button>
+        <button onClick={clickHandler} disabled={currency === 'AUD'}>
+          AUD
+        </button>
+        <button onClick={clickHandler} disabled={currency === 'USD'}>
+          USD
+        </button>
+        <button onClick={clickHandler} disabled={currency === 'EUR'}>
+          EUR
+        </button>
+        <button onClick={clickHandler} disabled={currency === 'GBP'}>
+          GBP
+        </button>
       </div>
     </div>
   )
