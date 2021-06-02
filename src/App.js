@@ -9,8 +9,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true)
   const [priceData, setPriceData] = useState()
   const [timeData, setTimeData] = useState()
-  const [currency, setCurrency] = useState('AUD')
-  const [currencySymbol, setCurrencySymbol] = useState('$')
+  const [currency, setCurrency] = useState({ code: 'AUD', symbol: '$' })
 
   const symbolReference = {
     AUD: '$',
@@ -33,7 +32,7 @@ function App() {
       try {
         const pricePromise = () => {
           return axios.get(
-            `https://api.coinbase.com/v2/prices/BTC-${currency}/spot`
+            `https://api.coinbase.com/v2/prices/BTC-${currency.code}/spot`
           )
         }
         const timePromise = () => {
@@ -62,10 +61,11 @@ function App() {
 
   // Handler for buttons to set currency and currencySymbol state
   const clickHandler = (props) => {
-    let currencyCode = props.target.innerText
-    setCurrency(currencyCode)
-    let currencySymbolCode = symbolReference[currencyCode]
-    setCurrencySymbol(currencySymbolCode)
+    let selectedCurrency = props.target.innerText
+    setCurrency({
+      code: selectedCurrency,
+      symbol: symbolReference[selectedCurrency],
+    })
   }
 
   return (
@@ -76,23 +76,23 @@ function App() {
       ) : (
         <div>
           <p>
-            {currencySymbol}
+            {currency.symbol}
             {priceData}
           </p>
           <p>as at {timeData}</p>
         </div>
       )}
       <div>
-        <button onClick={clickHandler} disabled={currency === 'AUD'}>
+        <button onClick={clickHandler} disabled={currency.code === 'AUD'}>
           AUD
         </button>
-        <button onClick={clickHandler} disabled={currency === 'USD'}>
+        <button onClick={clickHandler} disabled={currency.code === 'USD'}>
           USD
         </button>
-        <button onClick={clickHandler} disabled={currency === 'EUR'}>
+        <button onClick={clickHandler} disabled={currency.code === 'EUR'}>
           EUR
         </button>
-        <button onClick={clickHandler} disabled={currency === 'GBP'}>
+        <button onClick={clickHandler} disabled={currency.code === 'GBP'}>
           GBP
         </button>
       </div>
