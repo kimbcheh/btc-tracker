@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import Container from 'react-bootstrap/Container'
+import Jumbotron from 'react-bootstrap/Jumbotron'
 import axios from 'axios'
 import dayjs from 'dayjs'
 
@@ -68,34 +70,36 @@ function App() {
   }
 
   return (
-    <div>
-      <h1>BTC Tracker</h1>
-      {isLoading ? (
-        <div>Loading ...</div>
-      ) : (
+    <Container>
+      <Jumbotron>
+        <h1>BTC Tracker</h1>
+        {isLoading ? (
+          <div>Loading ...</div>
+        ) : (
+          <div>
+            <p>
+              {currency.symbol}
+              {priceData}
+            </p>
+            <p>as at {timeData}</p>
+          </div>
+        )}
         <div>
-          <p>
-            {currency.symbol}
-            {priceData}
-          </p>
-          <p>as at {timeData}</p>
+          <button onClick={clickHandler} disabled={currency.code === 'AUD'}>
+            AUD
+          </button>
+          <button onClick={clickHandler} disabled={currency.code === 'USD'}>
+            USD
+          </button>
+          <button onClick={clickHandler} disabled={currency.code === 'EUR'}>
+            EUR
+          </button>
+          <button onClick={clickHandler} disabled={currency.code === 'GBP'}>
+            GBP
+          </button>
         </div>
-      )}
-      <div>
-        <button onClick={clickHandler} disabled={currency.code === 'AUD'}>
-          AUD
-        </button>
-        <button onClick={clickHandler} disabled={currency.code === 'USD'}>
-          USD
-        </button>
-        <button onClick={clickHandler} disabled={currency.code === 'EUR'}>
-          EUR
-        </button>
-        <button onClick={clickHandler} disabled={currency.code === 'GBP'}>
-          GBP
-        </button>
-      </div>
-    </div>
+      </Jumbotron>
+    </Container>
   )
 }
 
