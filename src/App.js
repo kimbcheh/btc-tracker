@@ -4,7 +4,6 @@ import Jumbotron from 'react-bootstrap/Jumbotron'
 import Button from 'react-bootstrap/Button'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Spinner from 'react-bootstrap/Spinner'
-import Row from 'react-bootstrap/Row'
 import axios from 'axios'
 import dayjs from 'dayjs'
 
@@ -75,58 +74,56 @@ function App() {
 
   return (
     <Container className="mt-5">
-      <Jumbotron>
-        <Container className="text-center">
-          <h1>BTC Tracker</h1>
-          <Container
-            style={{ height: '180px' }}
-            className="d-flex align-items-center justify-content-center"
-          >
-            {isLoading ? (
-              <Spinner animation="border" className="text-primary" />
-            ) : (
-              <div>
-                <p>
-                  <h2 className="display-1">
-                    {currency.symbol}
-                    {priceData}
-                  </h2>
-                </p>
-                <p className="text-secondary">as at {timeData}</p>
-              </div>
-            )}
-          </Container>
-          <ButtonGroup>
-            <Button
-              onClick={clickHandler}
-              disabled={currency.code === 'AUD'}
-              variant="primary"
-            >
-              AUD
-            </Button>
-            <Button
-              onClick={clickHandler}
-              disabled={currency.code === 'USD'}
-              variant="primary"
-            >
-              USD
-            </Button>
-            <Button
-              onClick={clickHandler}
-              disabled={currency.code === 'EUR'}
-              variant="primary"
-            >
-              EUR
-            </Button>
-            <Button
-              onClick={clickHandler}
-              disabled={currency.code === 'GBP'}
-              variant="primary"
-            >
-              GBP
-            </Button>
-          </ButtonGroup>
+      <Jumbotron className="text-center">
+        <h1>BTC Tracker</h1>
+        <Container
+          style={{ height: '180px' }}
+          className="d-flex align-items-center justify-content-center"
+        >
+          {isLoading ? (
+            <Spinner animation="border" className="text-primary" />
+          ) : (
+            <div>
+              <p>
+                <h2 className="display-1">
+                  {currency.symbol}
+                  {priceData}
+                </h2>
+              </p>
+              <p className="text-secondary">as at {timeData}</p>
+            </div>
+          )}
         </Container>
+        <ButtonGroup>
+          <Button
+            onClick={clickHandler}
+            disabled={currency.code === 'AUD'}
+            variant="primary"
+          >
+            AUD
+          </Button>
+          <Button
+            onClick={clickHandler}
+            disabled={currency.code === 'USD'}
+            variant="primary"
+          >
+            USD
+          </Button>
+          <Button
+            onClick={clickHandler}
+            disabled={currency.code === 'EUR'}
+            variant="primary"
+          >
+            EUR
+          </Button>
+          <Button
+            onClick={clickHandler}
+            disabled={currency.code === 'GBP'}
+            variant="primary"
+          >
+            GBP
+          </Button>
+        </ButtonGroup>
       </Jumbotron>
     </Container>
   )
