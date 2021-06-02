@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import Container from 'react-bootstrap/Container'
 import Jumbotron from 'react-bootstrap/Jumbotron'
+import Button from 'react-bootstrap/Button'
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import axios from 'axios'
 import dayjs from 'dayjs'
 
@@ -84,20 +86,38 @@ function App() {
             <p>as at {timeData}</p>
           </div>
         )}
-        <div>
-          <button onClick={clickHandler} disabled={currency.code === 'AUD'}>
-            AUD
-          </button>
-          <button onClick={clickHandler} disabled={currency.code === 'USD'}>
-            USD
-          </button>
-          <button onClick={clickHandler} disabled={currency.code === 'EUR'}>
-            EUR
-          </button>
-          <button onClick={clickHandler} disabled={currency.code === 'GBP'}>
-            GBP
-          </button>
-        </div>
+        <Container>
+          <ButtonGroup>
+            <Button
+              onClick={clickHandler}
+              disabled={currency.code === 'AUD'}
+              variant="primary"
+            >
+              AUD
+            </Button>
+            <Button
+              onClick={clickHandler}
+              disabled={currency.code === 'USD'}
+              variant="primary"
+            >
+              USD
+            </Button>
+            <Button
+              onClick={clickHandler}
+              disabled={currency.code === 'EUR'}
+              variant="primary"
+            >
+              EUR
+            </Button>
+            <Button
+              onClick={clickHandler}
+              disabled={currency.code === 'GBP'}
+              variant="primary"
+            >
+              GBP
+            </Button>
+          </ButtonGroup>
+        </Container>
       </Jumbotron>
     </Container>
   )
