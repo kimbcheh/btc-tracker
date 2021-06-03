@@ -16,10 +16,6 @@ function App() {
   const [timeData, setTimeData] = useState()
   const [currency, setCurrency] = useState({ code: 'AUD', symbol: '$' })
 
-  const onClick = (event) => {
-    setCurrency(event)
-  }
-
   useEffect(() => {
     // Set to loading again on each refresh
     setIsLoading(true)
@@ -60,6 +56,11 @@ function App() {
       clearInterval(interval)
     }
   }, [currency])
+
+  // Set currency state from CurrencySelector component
+  const onClick = (event) => {
+    setCurrency(event)
+  }
 
   return (
     <Container className="container-main">
