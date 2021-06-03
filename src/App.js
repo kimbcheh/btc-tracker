@@ -15,7 +15,7 @@ function App() {
   const [timeData, setTimeData] = useState()
   const [currency, setCurrency] = useState({ code: 'AUD', symbol: '$' })
 
-  const handleCurrency = (event) => {
+  const onClick = (event) => {
     setCurrency(event)
   }
 
@@ -78,7 +78,7 @@ function App() {
             />
           )}
         </Container>
-        <CurrencySelector currency={currency} handleCurrency={handleCurrency} />
+        <CurrencySelector currency={currency} onClick={onClick} />
       </Jumbotron>
     </Container>
   )

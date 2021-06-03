@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 
-function CurrencySelect({ currency, handleCurrency }) {
+function CurrencySelect({ currency, onClick }) {
   const symbolReference = {
     AUD: '$',
     USD: '$',
@@ -11,7 +11,7 @@ function CurrencySelect({ currency, handleCurrency }) {
 
   const clickHandler = (props) => {
     let selectedCurrency = props.target.innerText
-    handleCurrency({
+    onClick({
       code: selectedCurrency,
       symbol: symbolReference[selectedCurrency],
     })
