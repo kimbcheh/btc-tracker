@@ -71,11 +71,7 @@ function App() {
           {isLoading ? (
             <Spinner animation="border" className="text-primary" />
           ) : (
-            <Price
-              displayPrice={priceData}
-              displayTime={timeData}
-              displaySymbol={currency.symbol}
-            />
+            <Price price={priceData} time={timeData} symbol={currency.symbol} />
           )}
         </Container>
         <CurrencySelector currency={currency} onClick={onClick} />
