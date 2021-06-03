@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Container from 'react-bootstrap/Container'
 import Jumbotron from 'react-bootstrap/Jumbotron'
+import Spinner from 'react-bootstrap/Spinner'
 import axios from 'axios'
 import dayjs from 'dayjs'
 import Price from './components/Price'
@@ -63,12 +64,20 @@ function App() {
     <Container className="mt-5">
       <Jumbotron className="text-center">
         <h1>BTC Tracker</h1>
-        <Price
-          displayPrice={priceData}
-          displayTime={timeData}
-          displaySymbol={currency.symbol}
-          isLoading={isLoading}
-        />
+        <Container
+          style={{ height: '180px' }}
+          className="d-flex align-items-center justify-content-center"
+        >
+          {isLoading ? (
+            <Spinner animation="border" className="text-primary" />
+          ) : (
+            <Price
+              displayPrice={priceData}
+              displayTime={timeData}
+              displaySymbol={currency.symbol}
+            />
+          )}
+        </Container>
         <CurrencySelector currency={currency} handleCurrency={handleCurrency} />
       </Jumbotron>
     </Container>
