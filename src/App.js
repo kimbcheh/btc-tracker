@@ -6,6 +6,7 @@ import axios from 'axios'
 import dayjs from 'dayjs'
 import Price from './components/Price'
 import CurrencySelector from './components/CurrencySelector'
+import './App.css'
 
 dayjs().format()
 
@@ -61,13 +62,10 @@ function App() {
   }, [currency])
 
   return (
-    <Container className="mt-5">
-      <Jumbotron className="text-center">
+    <Container className="container-main">
+      <Jumbotron className="jumbotron">
         <h1>BTC Tracker</h1>
-        <Container
-          style={{ height: '180px' }}
-          className="d-flex align-items-center justify-content-center"
-        >
+        <Container className="container-price">
           {isLoading ? (
             <Spinner animation="border" className="text-primary" />
           ) : (

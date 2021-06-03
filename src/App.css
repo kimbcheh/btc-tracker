@@ -1,0 +1,14 @@
+.container-main {
+  margin-top: 5%;
+}
+
+.container-price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+}
+
+.jumbotron {
+  text-align: center;
+}
