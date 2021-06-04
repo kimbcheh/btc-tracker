@@ -12,6 +12,7 @@ dayjs().format()
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
+  const [hasError, setHasError] = useState(false)
   const [priceData, setPriceData] = useState()
   const [timeData, setTimeData] = useState()
   const [currency, setCurrency] = useState({ code: 'AUD', symbol: '$' })
@@ -19,6 +20,7 @@ function App() {
   useEffect(() => {
     // Set to loading again on each refresh
     setIsLoading(true)
+    setHasError(false)
 
     // Initialising interval of 60 seconds
     const interval = setInterval(() => {
@@ -30,7 +32,8 @@ function App() {
       try {
         const pricePromise = () => {
           return axios.get(
-            `https://api.coinbase.com/v2/prices/BTC-${currency.code}/spot`
+            // `https://api.coinbase.com/v2/prices/BTC-${currency.code}/spot`
+            'https://api.coinbase.com/v2/prices/BTC-AAA/spot'
           )
         }
         const timePromise = () => {
@@ -45,6 +48,8 @@ function App() {
           setIsLoading(false)
         })
       } catch (error) {
+        setHasError(true)
+        setIsLoading(false)
         console.error(error)
       }
     }
@@ -67,6 +72,7 @@ function App() {
       <Jumbotron className="jumbotron">
         <h1>BTC Tracker</h1>
         <Container className="container-price">
+          {hasError && <p>Sorry! Something went wrong...</p>}
           {isLoading ? (
             <Spinner animation="border" className="text-primary" />
           ) : (
