@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Alert from 'react-bootstrap/Alert'
 import Container from 'react-bootstrap/Container'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Spinner from 'react-bootstrap/Spinner'
@@ -12,13 +13,15 @@ dayjs().format()
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
+  const [hasError, setHasError] = useState(false)
   const [priceData, setPriceData] = useState()
   const [timeData, setTimeData] = useState()
   const [currency, setCurrency] = useState({ code: 'AUD', symbol: '$' })
 
   useEffect(() => {
-    // Set to loading again on each refresh
+    // On each refresh update loading on, error off
     setIsLoading(true)
+    setHasError(false)
 
     // Initialising interval of 60 seconds
     const interval = setInterval(() => {
@@ -45,7 +48,9 @@ function App() {
           setIsLoading(false)
         })
       } catch (error) {
-        console.error(error)
+        setHasError(true)
+        setIsLoading(false)
+        console.log(error.response)
       }
     }
 
@@ -67,9 +72,11 @@ function App() {
       <Jumbotron className="jumbotron">
         <h1>BTC Tracker</h1>
         <Container className="container-price">
-          {isLoading ? (
-            <Spinner animation="border" className="text-primary" />
-          ) : (
+          {hasError && (
+            <Alert variant="danger">Sorry! Something went wrong...</Alert>
+          )}
+          {isLoading && <Spinner animation="border" className="text-primary" />}
+          {!hasError && !isLoading && (
             <Price price={priceData} time={timeData} symbol={currency.symbol} />
           )}
         </Container>
