@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Alert from 'react-bootstrap/Alert'
 import Container from 'react-bootstrap/Container'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Spinner from 'react-bootstrap/Spinner'
@@ -72,7 +73,9 @@ function App() {
       <Jumbotron className="jumbotron">
         <h1>BTC Tracker</h1>
         <Container className="container-price">
-          {hasError && <p>Sorry! Something went wrong...</p>}
+          {hasError && (
+            <Alert variant="danger">Sorry! Something went wrong...</Alert>
+          )}
           {/* {isLoading ? (
             <Spinner animation="border" className="text-primary" />
           ) : (
