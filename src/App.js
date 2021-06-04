@@ -19,7 +19,7 @@ function App() {
   const [currency, setCurrency] = useState({ code: 'AUD', symbol: '$' })
 
   useEffect(() => {
-    // Set to loading again on each refresh
+    // On each refresh update loading on, error off
     setIsLoading(true)
     setHasError(false)
 
@@ -50,7 +50,7 @@ function App() {
       } catch (error) {
         setHasError(true)
         setIsLoading(false)
-        console.error(error)
+        console.log(error.response)
       }
     }
 
