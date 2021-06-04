@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
 import Container from 'react-bootstrap/Container'
 import Jumbotron from 'react-bootstrap/Jumbotron'
-import Button from 'react-bootstrap/Button'
-import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Spinner from 'react-bootstrap/Spinner'
 import axios from 'axios'
 import dayjs from 'dayjs'
+import Price from './components/Price'
+import CurrencySelector from './components/CurrencySelector'
+import './App.css'
 
 dayjs().format()
 
@@ -14,13 +15,6 @@ function App() {
   const [priceData, setPriceData] = useState()
   const [timeData, setTimeData] = useState()
   const [currency, setCurrency] = useState({ code: 'AUD', symbol: '$' })
-
-  const symbolReference = {
-    AUD: '$',
-    USD: '$',
-    EUR: '€',
-    GBP: '£',
-  }
 
   useEffect(() => {
     // Set to loading again on each refresh
@@ -63,67 +57,23 @@ function App() {
     }
   }, [currency])
 
-  // Handler for buttons to set currency and currencySymbol state
-  const clickHandler = (props) => {
-    let selectedCurrency = props.target.innerText
-    setCurrency({
-      code: selectedCurrency,
-      symbol: symbolReference[selectedCurrency],
-    })
+  // Set currency state from CurrencySelector component
+  const onClick = (event) => {
+    setCurrency(event)
   }
 
   return (
-    <Container className="mt-5">
-      <Jumbotron className="text-center">
+    <Container className="container-main">
+      <Jumbotron className="jumbotron">
         <h1>BTC Tracker</h1>
-        <Container
-          style={{ height: '180px' }}
-          className="d-flex align-items-center justify-content-center"
-        >
+        <Container className="container-price">
           {isLoading ? (
             <Spinner animation="border" className="text-primary" />
           ) : (
-            <div>
-              <p>
-                <h2 className="display-1">
-                  {currency.symbol}
-                  {priceData}
-                </h2>
-              </p>
-              <p className="text-secondary">as at {timeData}</p>
-            </div>
+            <Price price={priceData} time={timeData} symbol={currency.symbol} />
           )}
         </Container>
-        <ButtonGroup>
-          <Button
-            onClick={clickHandler}
-            disabled={currency.code === 'AUD'}
-            variant="primary"
-          >
-            AUD
-          </Button>
-          <Button
-            onClick={clickHandler}
-            disabled={currency.code === 'USD'}
-            variant="primary"
-          >
-            USD
-          </Button>
-          <Button
-            onClick={clickHandler}
-            disabled={currency.code === 'EUR'}
-            variant="primary"
-          >
-            EUR
-          </Button>
-          <Button
-            onClick={clickHandler}
-            disabled={currency.code === 'GBP'}
-            variant="primary"
-          >
-            GBP
-          </Button>
-        </ButtonGroup>
+        <CurrencySelector currency={currency} onClick={onClick} />
       </Jumbotron>
     </Container>
   )

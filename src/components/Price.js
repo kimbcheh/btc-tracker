@@ -1,7 +1,13 @@
-function Price() {
+function Price({ price, time, symbol }) {
   return (
     <div>
-      <p>Price component placeholder</p>
+      <p>
+        <h2 className="display-1">
+          {symbol}
+          {price}
+        </h2>
+      </p>
+      <p className="text-secondary">as at {time}</p>
     </div>
   )
 }
