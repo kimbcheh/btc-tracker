@@ -73,9 +73,13 @@ function App() {
         <h1>BTC Tracker</h1>
         <Container className="container-price">
           {hasError && <p>Sorry! Something went wrong...</p>}
-          {isLoading ? (
+          {/* {isLoading ? (
             <Spinner animation="border" className="text-primary" />
           ) : (
+            <Price price={priceData} time={timeData} symbol={currency.symbol} />
+          )} */}
+          {isLoading && <Spinner animation="border" className="text-primary" />}
+          {!hasError && !isLoading && (
             <Price price={priceData} time={timeData} symbol={currency.symbol} />
           )}
         </Container>
