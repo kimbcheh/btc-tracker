@@ -33,8 +33,7 @@ function App() {
       try {
         const pricePromise = () => {
           return axios.get(
-            // `https://api.coinbase.com/v2/prices/BTC-${currency.code}/spot`
-            'https://api.coinbase.com/v2/prices/BTC-AAA/spot'
+            `https://api.coinbase.com/v2/prices/BTC-${currency.code}/spot`
           )
         }
         const timePromise = () => {
