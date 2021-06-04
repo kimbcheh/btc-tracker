@@ -75,11 +75,6 @@ function App() {
           {hasError && (
             <Alert variant="danger">Sorry! Something went wrong...</Alert>
           )}
-          {/* {isLoading ? (
-            <Spinner animation="border" className="text-primary" />
-          ) : (
-            <Price price={priceData} time={timeData} symbol={currency.symbol} />
-          )} */}
           {isLoading && <Spinner animation="border" className="text-primary" />}
           {!hasError && !isLoading && (
             <Price price={priceData} time={timeData} symbol={currency.symbol} />
