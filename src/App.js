@@ -24,9 +24,9 @@ function App() {
     setHasError(false)
 
     // Initialising interval of 60 seconds
-    const interval = setInterval(() => {
-      fetchData()
-    }, 60000)
+    // const interval = setInterval(() => {
+    //   fetchData()
+    // }, 60000)
 
     // Fetch price and time data
     const fetchData = async () => {
@@ -55,6 +55,9 @@ function App() {
     }
 
     fetchData()
+
+    // Initialising interval of 60 seconds
+    const interval = setInterval(fetchData, 60000)
 
     // Clear interval set
     return () => {
