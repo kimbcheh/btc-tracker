@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 
-function CurrencySelector({ currency, onClick }) {
+function CurrencySelector({ selectedCurrency, onClick }) {
   // const symbolReference = {
   //   AUD: '$',
   //   USD: '$',
