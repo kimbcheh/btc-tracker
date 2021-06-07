@@ -10,23 +10,34 @@ function CurrencySelector({ selectedCurrency, onClick }) {
   // }
 
   const currencies = [
-    {code: 'AUD', symbol: '$'}
-    {code: 'USD', symbol: '$'}
-    {code: 'EUR', symbol: '€'}
-    {code: 'GBP', symbol: '£'}
+    { code: 'AUD', symbol: '$' },
+    { code: 'USD', symbol: '$' },
+    { code: 'EUR', symbol: '€' },
+    { code: 'GBP', symbol: '£' },
   ]
 
   const clickHandler = (props) => {
-    let selectedCurrency = props.target.innerText
-    onClick({
-      code: selectedCurrency,
-      symbol: symbolReference[selectedCurrency],
-    })
+    // let selectedCurrency = props.target.innerText
+    // onClick({
+    //   code: selectedCurrency,
+    //   symbol: symbolReference[selectedCurrency],
+    // })
   }
 
   return (
     <ButtonGroup>
-      <Button
+      {currencies.map((currency) => {
+        return (
+          <Button
+            onClick={clickHandler}
+            disabled={currency.code === selectedCurrency}
+            variant="primary"
+          >
+            {currency.code}
+          </Button>
+        )
+      })}
+      {/* <Button
         onClick={clickHandler}
         disabled={currency.code === 'AUD'}
         variant="primary"
@@ -53,7 +64,7 @@ function CurrencySelector({ selectedCurrency, onClick }) {
         variant="primary"
       >
         GBP
-      </Button>
+      </Button> */}
     </ButtonGroup>
   )
 }
