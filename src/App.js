@@ -19,16 +19,11 @@ function App() {
   const [currency, setCurrency] = useState({ code: 'AUD', symbol: '$' })
 
   useEffect(() => {
-    // On each refresh update loading on, error off
+    // On each refresh update loading and error states
     setIsLoading(true)
     setHasError(false)
 
-    // Initialising interval of 60 seconds
-    const interval = setInterval(() => {
-      fetchData()
-    }, 60000)
-
-    // Fetch price and time data
+    // Fetch price and time data from CoinBase
     const fetchData = async () => {
       try {
         const pricePromise = () => {
@@ -55,6 +50,9 @@ function App() {
     }
 
     fetchData()
+
+    // Initialising interval of 60 seconds
+    const interval = setInterval(fetchData, 60000)
 
     // Clear interval set
     return () => {
