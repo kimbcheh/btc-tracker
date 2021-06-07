@@ -40,6 +40,7 @@ yarn start
 
 This project is built using React and the following:
 
+- [CoinBase Digital API](https://developers.coinbase.com/)
 - [create-react-app](https://github.com/facebook/create-react-app)
 - [react-bootstrap/bootstrap](https://github.com/react-bootstrap/react-bootstrap)
 - [axios](https://github.com/axios/axios)
