@@ -17,11 +17,18 @@ function CurrencySelector({ selectedCurrency, onClick }) {
   ]
 
   const clickHandler = (props) => {
-    // let selectedCurrency = props.target.innerText
+    // let selectCurrency = props.target.innerText
     // onClick({
-    //   code: selectedCurrency,
-    //   symbol: symbolReference[selectedCurrency],
+    //   code: selectCurrency,
+    //   symbol: currency[selectedCurrency],
     // })
+    // let newCurrency = currencies.find(({code}) => code === props.target.innerText)
+
+    let newCurrency = currencies.find(
+      ({ code }) => code === props.target.innerText
+    )
+
+    onClick(newCurrency)
   }
 
   return (
@@ -29,8 +36,9 @@ function CurrencySelector({ selectedCurrency, onClick }) {
       {currencies.map((currency) => {
         return (
           <Button
+            key={currency.code}
             onClick={clickHandler}
-            disabled={currency.code === selectedCurrency}
+            disabled={currency.code === selectedCurrency.code}
             variant="primary"
           >
             {currency.code}
