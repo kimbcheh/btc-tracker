@@ -78,7 +78,7 @@ function App() {
             <Price price={priceData} time={timeData} symbol={currency.symbol} />
           )}
         </Container>
-        <CurrencySelector currency={currency} onClick={onClick} />
+        <CurrencySelector selectedCurrency={currency} onClick={onClick} />
       </Jumbotron>
     </Container>
   )
